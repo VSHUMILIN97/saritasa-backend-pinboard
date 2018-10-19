@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% comment %}
+  This template provides a user with fields to create a new advert
+{% endcomment %}
+{% load staticfiles %}
+{% block content %}
+
+<form method="post" class="container col-sm-4" enctype="multipart/form-data">{% csrf_token %}
+    {% for field in form %}
+     <div class="form-group">
+         <p>{{field.errors}}</p>
+         <label>{{field.label}}</label>
+         <div>{{field}}</div>
+     </div>
+    {% endfor %}
+    <button class="btn" type="submit">Post</button>
+
+</form>
+
+
+<form action="{% url 'edit-image' pk=advertisement.id %}" method="post" class="container col-sm-4" style="margin-left: 10%;" enctype="multipart/form-data">{% csrf_token %}
+    {{ image_formset.management_form }}
+    {% for field in image_formset %}
+     <div class="form-group">
+         <p>{{field.errors}}</p>
+         <label>{{field.label}}</label>
+         <div>{{field}}</div>
+     </div>
+    {% endfor %}
+  <button class="btn" type="submit">Confirm</button>
+</form>
+
+<p class="text-center"><a href="{% url 'list' %}">Back to the list</a></p>
+{% endblock %}

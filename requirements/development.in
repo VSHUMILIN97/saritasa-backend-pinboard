@@ -1,0 +1,52 @@
+-r base.in
+
+coverage
+django_coverage_plugin
+django-test-plus
+django-extensions
+django-debug-toolbar
+django-pdb
+Werkzeug
+flake8
+pep8
+autopep8
+
+# Fast creatin of model instances. May be used in tests
+factory_boy
+
+# improved REPL
+ipdb
+ipython
+ipython-genutils
+ptipython
+ptpython
+fabric3
+
+# emacs
+rope
+jedi
+importmagic
+elpy
+yapf
+
+# for generating test coverage reports
+django-jenkins
+
+# add ability to run tests without migrations
+# usage: ./manage.py test --keepdb --nomigrations
+django-test-without-migrations
+
+# for proper sorting
+isort
+
+# tool for celery monitoring
+flower
+
+# Obtaining traceback when run tests in parallel
+tblib
+
+# Social OAuth
+social-auth-app-django
+
+# Taggit
+django-taggit

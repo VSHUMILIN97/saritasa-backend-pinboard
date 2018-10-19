@@ -1,0 +1,27 @@
+#user_auth_done {
+      margin-top: 20px;
+      background-color: bisque;
+      border: 1px solid gold;
+      border-radius: 4px;
+      margin-left: 400px;
+      margin-right: 400px;
+      margin-bottom: 10px;
+}
+#body_linker{
+      margin-right: 400px
+}
+
+.inline{
+    display: inline-block;
+}
+
+.isDisabled {
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+
+}
+.card border-light mb-3 container {
+     text-align: center;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% comment %}
+  The base template
+{% endcomment %}
+
+  <head>
+
+    {% load staticfiles i18n %}
+
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'css/base/layout.css' %}" rel="stylesheet" type="text/css">
+
+
+
+    <title>{% block t %}PinBoard{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta charset="UTF-8">
+    <title>Advertisements board</title>
+
+    {% include 'base/css.html' %}
+    {% include 'base/bootstrap_defaults.html' %}
+    {% if debug  %}
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    {% else %}
+      <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    {% endif %}
+  </head>
+
+  <body>
+
+  <div class="wrapper row1">
+  <header id="header" class="clear">
+    <div id="hgroup">
+      <h1><a href="/ads/">Pinboard</a></h1>
+    </div>
+    <nav>
+      <ul>
+        {% if user.is_authenticated %}
+        <li><a href="/ads/new-advert">Add advertisement</a></li>
+        {% endif %}
+        <li><a href="#">Future content</a></li>
+        <li class="last" id="drop" style="width: 200px;">
+          <a href="" class="dropbtn">Profile menu</a>
+          <div class="dropdown-content">
+            {% if user.is_authenticated %}
+            <a href="/users/accounts/profile">My account</a>
+            <a></a>
+            <a href="{% url 'logout' %}" style="padding-bottom: 64px;">Forget my account</a>
+            {% else %}
+            <a href="{% url 'social:begin' 'vk-oauth2' %}?next={{ request.path }}" style="padding-bottom: 48px;">Login with VK</a>
+            {% endif %}
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</div>
+    {% include 'base/js.html' %}
+    <div class='container'>
+    {% block content %}
+    {% endblock content %}
+    </div>
+  <!-- Footer -->
+<div class="wrapper row3">
+  <div id="footer" class="clear">
+  </div>
+</div>
+<!-- Copyright -->
+<div class="wrapper row4">
+  <footer id="copyright" class="clear">
+    <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">By who?</a></p>
+  </footer>
+</div>
+  </body>
+</html>

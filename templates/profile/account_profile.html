@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% block head_title %}
+    Welcome - {{ user.username }}
+  {% endblock head_title %}
+{% endblock title %}
+
+{% load staticfiles %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/profile/account_profile.css' %}" />
+
+<div class="card border-light mb-3 container" style="max-width: 18rem; text-align: center;">
+  <div class="card-header">
+    {% if user.first_name %}
+    <span class="card-text"><b>{{ user.first_name }}</b></span>
+    {% endif %}
+    {% if user.last_name %}
+    <span class="card-text"><b>{{ user.last_name }}</b></span>
+    {% endif %}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><b>VK profile: </b><a href="https://vk.com/{{ user.username }}">vk.com/{{ user.username }}</a></h5>
+    <h5 class="card-id"><b>Your ID: </b>{{user.email}}</h5>
+    <p class="card-text"><b>Registration date - </b>{{ user.date_joined }}</p>
+  </div>
+</div>
+
+<p class="h3 text-center">Your advertisements:</p>
+
+<table class="table table-striped" id="table_id">
+    <thead class="text-center">
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Address</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for advert in user_ads %}
+        <tr class="text-center">
+            <td scope="row"><a href="{% url 'info' id=advert.id %}">{{advert.title}}</a></td>
+            <td>{{advert.address}}</td>
+            <td>{{advert.price}}</td>
+        </tr>
+{% endfor %}
+
+    </tbody>
+</table>
+
+<p class="text-center"><a href="{% url 'list' %}">Back to the list</a></p>
+
+{%endblock content %}
+

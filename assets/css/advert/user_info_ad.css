@@ -1,0 +1,13 @@
+.mainBlock{
+    text-align: center;
+}
+
+
+.inline{
+    display: inline-block;
+     padding: 15px;
+}
+
+.lineLinks {
+  margin-left: 15px;
+}

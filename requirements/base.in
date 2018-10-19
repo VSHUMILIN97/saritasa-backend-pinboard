@@ -1,0 +1,80 @@
+# *************************************************
+# Django packages
+# *************************************************
+django
+
+# ORM Caching layer for Django Models
+django-cacheops
+
+# Control CORS headers from within the app
+django-cors-headers
+
+# The app provides a tag and filter that lets you quickly render forms
+django-crispy-forms
+
+# filter querysets dynamically
+django-filter
+
+# Nice addons to simplify ORM layer
+django-model-utils
+
+# Storage to AWS S3
+django-storages
+boto3
+
+# Django REST Framework
+djangorestframework
+djangorestframework-gis
+djangorestframework-hstore
+
+# Database abstraction layer
+psycopg2
+
+# Timezones and datetime utils
+pytz
+
+# redis SDK
+redis
+django-redis
+
+# Celery
+celery
+django-celery-beat
+
+# nice string conversion procedures
+inflection
+
+# Bind actions on every object in admin object view
+django-object-actions
+
+# Freeze time for tests
+freezegun
+
+# Constance - Dynamic Django settings
+django-constance
+django-constance[database]
+
+# Functional programming in python
+funcy
+
+# Social OAuth
+social-auth-app-django
+
+# MoneyField for ads
+django-money
+
+# Python imaging library
+Pillow
+
+# VK API library
+vk
+
+# Tag API
+django-taggit
+
+#DJ CHANNELS
+channels
+
+#REST OAuth2
+django-rest-framework-social-oauth2
+rest_social_auth

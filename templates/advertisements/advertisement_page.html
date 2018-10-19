@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% comment %}
+  This template represents an advert's data
+{% endcomment %}
+
+
+{% block content %}
+<link href="{% static 'css/advert/advert.css' %}" rel="stylesheet" type="text/css">
+
+
+{% comment %}
+  an advert's information
+{% endcomment %}
+
+<div class="container-fluid" style="text-align:center; background-color: #f6f6ff;">
+
+<h1>{{advert.title}}</h1>
+
+{% for photo in photos %}
+  {% if forloop.counter0 == 0 %}
+    <img src="{{ photo.url }}" alt="img" class="advert-images">
+  {% else %}
+    <img src="{{ photo.url }}" alt="img" class="advert-images" style="height: 100px;">
+  {% endif %}
+{% endfor %}
+
+<p>Description:</p>
+<p>{{advert.description}}</p>
+
+<p>Author: <a href="https://vk.com/id{{ advert.user.email }}">{{ advert.user.first_name }} {{ advert.user.last_name }}</a></p>
+
+<p>Address: {{advert.address}}</p>
+
+<p>Price: {{advert.price}}</p>
+
+<p>Created: {{advert.created_date}}</p>
+
+<p>Last edit: {{advert.modified_date}}</p>
+
+<p>Tags: {% for tag in advert.tags.all %} <b>{% if not forloop.last %}{{ tag }}, {% else %} {{ tag }}. {% endif %} {% endfor %}</b></p>
+
+{% if advert.user == user %}
+  <form action="{% url 'edit-advert' pk=advert.id %}">
+    <button type="submit">Edit</button>
+  </form>
+{% endif %}
+
+</div>
+
+{% comment %}
+  comments
+{% endcomment %}
+
+{% if comments %}
+  <br>
+  <p class="font-weight-bold">Comments:</p>
+  {% for comment in comments %}
+  <p>Author: {{comment.user}}, date: {{comment.created_date}}</p>
+  <p>{{comment.text}}</p>
+  <br>
+  {% endfor %}
+{% endif %}
+
+{% comment %}
+  a form to add a new comment
+{% endcomment %}
+
+{% if user.is_authenticated %}
+
+  <form method="post">{% csrf_token %}
+       <div class="form-group">
+           <p>Add new comment:</p>
+           <input type="text" name="comment_text" required>
+       </div>
+      <button class="btn" type="submit">Post</button>
+  </form>
+
+{% endif %}
+
+
+{% comment %}
+  complaints
+{% endcomment %}
+
+{% if complaints and user.is_superuser %}
+  <br>
+  <p class="font-weight-bold">Complaints:</p>
+  {% for complaint in complaints %}
+  <p>Author: {{complaint.user}}, date: {{complaint.created_date}}</p>
+  <p>{{complaint.text}}</p>
+    <p>Applied by: {{ complaint.applier }}</p>
+  <p>confirmed: {% if complaint.confirmed %} yes {% else %} no {% endif %}</p>
+  <br>
+  {% endfor %}
+{% endif %}
+
+{% comment %}
+  a form to add a new complaint
+{% endcomment %}
+
+{% if user.is_authenticated %}
+
+  <br>
+  <form method="post">{% csrf_token %}
+       <div class="form-group">
+           <p>Add new complaint:</p>
+           <input type="text" name="complaint_text" required>
+       </div>
+      <button class="btn" type="submit">Post</button>
+  </form>
+
+{% endif %}
+
+<p class="text-center"><a href="{% url 'list' %}">Back to the list</a></p>
+
+{% endblock %}

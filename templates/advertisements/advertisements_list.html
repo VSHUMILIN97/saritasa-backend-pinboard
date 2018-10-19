@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+    {% comment %}
+      this template lists all adverts
+    {% endcomment %}
+
+{% block content %}
+{% load staticfiles %}
+<h1 class="text-center">Adverts history</h1>
+<link rel="stylesheet" type="text/css" href="{% static 'css/advert/user_info_ad.css' %}" />
+
+{% if user.first_name %}
+<div class="mainBlock">
+  <nav class="inline">
+    <b>{{ user.first_name }}</b>, here is the ads history. Check it out!
+  </nav>
+</div>
+  {% endif %}
+  <hr>
+  <form action=/ads/  method="get" style="display: inline">
+    <ul>{{ filter.form.as_ul }}</ul>
+     <input type="submit" />
+  </form>
+  <a href="/ads/">Reset</a>
+  <br>
+ {% for tag in all_tags %} {{ tag }} {% endfor %}
+<hr>
+
+  <hr>
+  <table class="table table-striped" id="table_id">
+    <thead class="text-center">
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Address</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for advert in parsed_adverts %}
+        <tr class="text-center">
+            <td scope="row"><a href="{% url 'info' id=advert.id %}">{{advert.title}}</a></td>
+            <td><a href="https://vk.com/id{{ advert.user.email }}">{{ advert.user.first_name }} {{ advert.user.last_name }}</a></td>
+            <td>{{advert.address}}</td>
+            <td>{{advert.price}}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

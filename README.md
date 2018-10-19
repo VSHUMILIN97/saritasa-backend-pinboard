@@ -1,0 +1,1 @@
+Some config/docker and other files were deleted. Only businnes logic here
